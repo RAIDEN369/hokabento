@@ -110,8 +110,12 @@
         
         .main-nav {
             display: flex;
-            gap: 40px;
+            gap: 20px;
             align-items: center;
+        }
+        
+        .nav-item {
+            position: relative;
         }
         
         .main-nav a {
@@ -124,6 +128,66 @@
             transition: all 0.3s ease;
             position: relative;
             overflow: hidden;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .dropdown-arrow {
+            font-size: 12px;
+            transition: transform 0.3s ease;
+        }
+        
+        .dropdown:hover .dropdown-arrow {
+            transform: rotate(180deg);
+        }
+        
+        .dropdown-content {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: white;
+            min-width: 200px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.15);
+            border-radius: 12px;
+            padding: 8px 0;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+        
+        .dropdown:hover .dropdown-content {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+        
+        .dropdown-content a {
+            color: #333;
+            padding: 12px 20px;
+            border-radius: 0;
+            font-size: 14px;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        
+        .dropdown-content a:hover {
+            background: #f8f9fa;
+            color: #E31C25;
+        }
+        
+        .order-btn {
+            background: linear-gradient(45deg, #FFD700, #FFA500) !important;
+            color: #B91C1C !important;
+            font-weight: 800 !important;
+            box-shadow: 0 4px 15px rgba(255, 215, 0, 0.4);
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
         }
         
         .main-nav a::before {
@@ -445,6 +509,13 @@
             background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.3), transparent);
         }
         
+        .menu-image-photo {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 2;
+        }
+        
         .food-icon {
             font-size: 80px;
             z-index: 2;
@@ -574,6 +645,114 @@
         .tag.family {
             background: linear-gradient(45deg, #059669, #047857);
             color: white;
+        }
+
+        /* Campaign Section Styles */
+        .campaign-section {
+            padding: 80px 0;
+            background: linear-gradient(135deg, #fff 0%, #f8fafc 100%);
+        }
+
+        .campaign-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-top: 60px;
+        }
+
+        .campaign-card {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .campaign-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+        }
+
+        .campaign-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #E31C25, #FF6B35, #FFD700);
+        }
+
+        .campaign-badge {
+            display: inline-block;
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 800;
+            color: white;
+            margin-bottom: 16px;
+            background: linear-gradient(45deg, #E31C25, #FF6B35);
+        }
+
+        .campaign-badge.new {
+            background: linear-gradient(45deg, #32CD32, #00FF7F);
+        }
+
+        .campaign-badge.delivery {
+            background: linear-gradient(45deg, #007bff, #0056b3);
+        }
+
+        .campaign-card h3 {
+            font-size: 20px;
+            font-weight: 800;
+            color: #333;
+            margin-bottom: 15px;
+            line-height: 1.3;
+        }
+
+        .campaign-price {
+            margin: 15px 0;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .campaign-price .original {
+            font-size: 16px;
+            color: #999;
+            text-decoration: line-through;
+        }
+
+        .campaign-price .discounted,
+        .campaign-price .new-price {
+            font-size: 24px;
+            font-weight: 900;
+            color: #E31C25;
+        }
+
+        .campaign-price .discount {
+            background: linear-gradient(45deg, #E31C25, #FF6B35);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 15px;
+            font-size: 12px;
+            font-weight: 800;
+        }
+
+        .campaign-description {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 12px;
+        }
+
+        .campaign-period,
+        .campaign-condition {
+            font-size: 14px;
+            color: #E31C25;
+            font-weight: 600;
         }
         
         /* CTA Section */
@@ -916,11 +1095,36 @@
                         <div class="logo-badge">毎日手作り</div>
                     </div>
                     <nav class="main-nav">
-                        <a href="/">ホーム</a>
-                        <a href="/menu">メニュー</a>
-                        <a href="/campaign">キャンペーン</a>
-                        <a href="/store">店舗情報</a>
-                        <a href="/contact">お問い合わせ</a>
+                        <div class="nav-item dropdown">
+                            <a href="/">ホーム</a>
+                        </div>
+                        <div class="nav-item dropdown">
+                            <a href="/menu">メニュー <span class="dropdown-arrow">▼</span></a>
+                            <div class="dropdown-content">
+                                <a href="/menu/bento">お弁当</a>
+                                <a href="/menu/teishoku">定食</a>
+                                <a href="/menu/don">丼物</a>
+                                <a href="/menu/side">サイドメニュー</a>
+                                <a href="/menu/seasonal">季節限定</a>
+                            </div>
+                        </div>
+                        <div class="nav-item dropdown">
+                            <a href="/campaign">キャンペーン</a>
+                        </div>
+                        <div class="nav-item dropdown">
+                            <a href="/store">店舗情報 <span class="dropdown-arrow">▼</span></a>
+                            <div class="dropdown-content">
+                                <a href="/store/search">店舗検索</a>
+                                <a href="/store/delivery">配達エリア</a>
+                                <a href="/store/hours">営業時間</a>
+                            </div>
+                        </div>
+                        <div class="nav-item">
+                            <a href="/contact">お問い合わせ</a>
+                        </div>
+                        <div class="nav-item cta">
+                            <a href="/order" class="order-btn">📞 今すぐ注文</a>
+                        </div>
                     </nav>
                 </div>
             </div>
@@ -964,10 +1168,46 @@
             </div>
         </section>
 
+        <!-- キャンペーンセクション -->
+        <section class="campaign-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2>🎉 期間限定キャンペーン</h2>
+                    <p>お得なキャンペーン情報をお見逃しなく！</p>
+                </div>
+                <div class="campaign-grid">
+                    <div class="campaign-card">
+                        <div class="campaign-badge">期間限定</div>
+                        <h3>🍱 から揚げ弁当 特価キャンペーン</h3>
+                        <p class="campaign-price">
+                            <span class="original">690円</span>
+                            <span class="discounted">590円</span>
+                            <span class="discount">100円OFF</span>
+                        </p>
+                        <p class="campaign-period">2024年7月1日〜31日まで</p>
+                    </div>
+                    <div class="campaign-card">
+                        <div class="campaign-badge new">NEW</div>
+                        <h3>🐄 新メニュー！牛カルビ焼肉弁当</h3>
+                        <p class="campaign-description">国産牛カルビを使用した贅沢な新メニューが登場！</p>
+                        <p class="campaign-price">
+                            <span class="new-price">780円</span>
+                        </p>
+                    </div>
+                    <div class="campaign-card">
+                        <div class="campaign-badge delivery">配達</div>
+                        <h3>🚚 配達エリア拡大記念</h3>
+                        <p class="campaign-description">新エリアでの配達開始を記念して送料無料キャンペーン実施中！</p>
+                        <p class="campaign-condition">3000円以上のご注文で送料無料</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <section class="featured-menu">
             <div class="container">
                 <div class="section-header">
-                    <h2>🔥 今週の人気メニュー TOP4</h2>
+                    <h2>🔥 今週の人気メニュー TOP8</h2>
                     <p>お客様から特にご好評いただいている逸品たちです</p>
                 </div>
                 <div class="menu-grid-pro" id="menu-grid">
@@ -1066,6 +1306,7 @@
                 price: 590,
                 description: '秘伝の下味で仕込んだジューシーなから揚げが自慢の一品。サクサクの衣とジューシーな肉汁が絶妙にマッチした当店イチオシのお弁当です。',
                 category: 'bento',
+                image: 'https://images.unsplash.com/photo-1562059390-a761a084768e?w=400&h=300&fit=crop&crop=center',
                 isNew: false,
                 isRecommended: true,
                 isPopular: true
@@ -1076,6 +1317,7 @@
                 price: 750,
                 description: '宮崎名物を当店風にアレンジ。特製タルタルソースがたっぷりかかった、ふっくらジューシーなチキン南蛮をお楽しみください。',
                 category: 'teishoku',
+                image: 'https://images.unsplash.com/photo-1604908176997-125f25cc6f3d?w=400&h=300&fit=crop&crop=center',
                 isNew: true,
                 isRecommended: true,
                 isPopular: false
@@ -1086,6 +1328,7 @@
                 price: 850,
                 description: '朝獲れの新鮮な海の幸をたっぷりと乗せた贅沢な一杯。マグロ、サーモン、イカなど厳選した海鮮が織りなす至福の味わいです。',
                 category: 'don',
+                image: 'https://images.unsplash.com/photo-1553621042-f6e147245754?w=400&h=300&fit=crop&crop=center',
                 isNew: false,
                 isRecommended: false,
                 isPopular: true
@@ -1096,9 +1339,54 @@
                 price: 650,
                 description: '国産牛肉100%使用。手こねで作ったふっくらハンバーグに特製デミグラスソースをかけた、お子様からご年配の方まで愛される定番メニュー。',
                 category: 'bento',
+                image: 'https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=400&h=300&fit=crop&crop=center',
                 isNew: false,
                 isRecommended: false,
                 isPopular: false
+            },
+            {
+                id: '5',
+                name: '牛カルビ焼肉弁当',
+                price: 780,
+                description: '厳選された国産牛カルビを秘伝のタレで味付け。ジューシーで柔らかい牛肉の旨味が口いっぱいに広がります。',
+                category: 'bento',
+                image: 'https://images.unsplash.com/photo-1529692236671-f1f6cf9683ba?w=400&h=300&fit=crop&crop=center',
+                isNew: false,
+                isRecommended: true,
+                isPopular: true
+            },
+            {
+                id: '6',
+                name: '天ぷら定食',
+                price: 680,
+                description: 'サクサクの衣に包まれた新鮮な海老と野菜の天ぷら。職人が一つ一つ丁寧に揚げた自慢の一品です。',
+                category: 'teishoku',
+                image: 'https://images.unsplash.com/photo-1561758033-d89a9ad46330?w=400&h=300&fit=crop&crop=center',
+                isNew: false,
+                isRecommended: false,
+                isPopular: true
+            },
+            {
+                id: '7',
+                name: 'うな重',
+                price: 1200,
+                description: '国産うなぎを使用した贅沢なうな重。特製の甘辛いタレが絶妙にマッチした至高の逸品です。',
+                category: 'don',
+                image: 'https://images.unsplash.com/photo-1583032015870-4557e8bbaa8b?w=400&h=300&fit=crop&crop=center',
+                isNew: true,
+                isRecommended: true,
+                isPopular: false
+            },
+            {
+                id: '8',
+                name: '親子丼',
+                price: 520,
+                description: 'ふわふわの卵と鶏肉の絶妙なハーモニー。だしの効いた優しい味わいで、お子様からお年寄りまで愛される定番メニュー。',
+                category: 'don',
+                image: 'https://images.unsplash.com/photo-1512058564366-18510be2db19?w=400&h=300&fit=crop&crop=center',
+                isNew: false,
+                isRecommended: false,
+                isPopular: true
             }
         ];
         
@@ -1133,13 +1421,17 @@
             const menuGrid = document.getElementById('menu-grid');
             if (!menuGrid) return;
 
-            const topMenus = menus.slice(0, 4);
+            const topMenus = menus.slice(0, 8);
             menuGrid.innerHTML = topMenus.map((menu, index) => `
                 <div class="menu-card-pro ${index === 0 ? 'featured' : ''}">
                     <div class="menu-image">
                         ${menu.isNew ? '<div class="menu-badge new">NEW</div>' : ''}
                         ${menu.isPopular && !menu.isNew ? '<div class="menu-badge hot">HOT</div>' : ''}
-                        <div class="food-icon">${getMenuIcon(menu.category)}</div>
+                        ${menu.image ? 
+                            `<img src="${menu.image}" alt="${menu.name}" class="menu-image-photo" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                             <div class="food-icon" style="display:none;">${getMenuIcon(menu.category)}</div>` :
+                            `<div class="food-icon">${getMenuIcon(menu.category)}</div>`
+                        }
                     </div>
                     <div class="menu-info">
                         <h3>${menu.name}</h3>
