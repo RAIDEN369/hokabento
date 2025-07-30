@@ -1,0 +1,1322 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ほか弁当 - 日本一美味しいお弁当をお届け</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Noto Sans JP', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #fff;
+        }
+        
+        /* Header Styles */
+        .header {
+            background: linear-gradient(135deg, #E31C25 0%, #B91C1C 50%, #991B1B 100%);
+            box-shadow: 0 8px 32px rgba(227, 28, 37, 0.4);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, rgba(255,255,255,0.1) 25%, transparent 25%, transparent 50%, rgba(255,255,255,0.1) 50%, rgba(255,255,255,0.1) 75%, transparent 75%);
+            background-size: 20px 20px;
+            animation: slide 2s linear infinite;
+            pointer-events: none;
+        }
+        
+        @keyframes slide {
+            0% { background-position: 0 0; }
+            100% { background-position: 20px 20px; }
+        }
+        
+        .header-top {
+            background: rgba(0,0,0,0.2);
+            padding: 10px 0;
+            font-size: 14px;
+            color: rgba(255,255,255,0.9);
+            text-align: center;
+            font-weight: 500;
+        }
+        
+        .header-main {
+            padding: 24px 0;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        
+        .logo-text {
+            font-size: 42px;
+            font-weight: 900;
+            color: #fff;
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.5);
+            letter-spacing: -2px;
+            background: linear-gradient(45deg, #fff, #FFD700);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .logo-badge {
+            background: linear-gradient(45deg, #FFD700, #FFA500);
+            color: #B91C1C;
+            padding: 8px 16px;
+            border-radius: 25px;
+            font-size: 13px;
+            font-weight: 800;
+            box-shadow: 0 4px 15px rgba(255, 215, 0, 0.4);
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+        
+        @keyframes glow {
+            from { box-shadow: 0 4px 15px rgba(255, 215, 0, 0.4); }
+            to { box-shadow: 0 6px 20px rgba(255, 215, 0, 0.7); }
+        }
+        
+        .main-nav {
+            display: flex;
+            gap: 40px;
+            align-items: center;
+        }
+        
+        .main-nav a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 16px;
+            padding: 12px 20px;
+            border-radius: 30px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .main-nav a::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: left 0.8s;
+        }
+        
+        .main-nav a:hover::before {
+            left: 100%;
+        }
+        
+        .main-nav a:hover {
+            background: rgba(255,255,255,0.2);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+        }
+        
+        /* Promotional Banner */
+        .promo-banner {
+            background: linear-gradient(45deg, #FFD700, #FFA500, #FF8C00);
+            background-size: 200% 200%;
+            animation: gradientShift 3s ease infinite;
+            color: #B91C1C;
+            padding: 16px 0;
+            text-align: center;
+            font-weight: 800;
+            font-size: 18px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        .promo-banner::before {
+            content: '🔥';
+            position: absolute;
+            left: -100px;
+            animation: fireSlide 4s ease-in-out infinite;
+            font-size: 24px;
+        }
+        
+        .promo-banner::after {
+            content: '🔥';
+            position: absolute;
+            right: -100px;
+            animation: fireSlide 4s ease-in-out infinite reverse;
+            font-size: 24px;
+        }
+        
+        @keyframes fireSlide {
+            0%, 100% { transform: translateX(0) rotate(0deg); }
+            50% { transform: translateX(200px) rotate(180deg); }
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #fff 0%, #f8fafc 50%, #e2e8f0 100%);
+            padding: 100px 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 60%;
+            height: 200%;
+            background: linear-gradient(45deg, rgba(227, 28, 37, 0.08), rgba(255, 215, 0, 0.08));
+            border-radius: 50%;
+            animation: float 8s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            33% { transform: translateY(-30px) rotate(120deg); }
+            66% { transform: translateY(20px) rotate(240deg); }
+        }
+        
+        .hero-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .hero-text h1 {
+            font-size: 56px;
+            font-weight: 900;
+            line-height: 1.1;
+            color: #1a1a1a;
+            margin-bottom: 32px;
+        }
+        
+        .hero-text .highlight {
+            color: #E31C25;
+            background: linear-gradient(45deg, #E31C25, #FF6B35, #FFD700);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: shimmer 3s ease-in-out infinite;
+        }
+        
+        @keyframes shimmer {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+        
+        .hero-text p {
+            font-size: 20px;
+            color: #666;
+            margin-bottom: 40px;
+            line-height: 1.8;
+            font-weight: 400;
+        }
+        
+        .hero-buttons {
+            display: flex;
+            gap: 24px;
+            flex-wrap: wrap;
+        }
+        
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            padding: 20px 40px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 18px;
+            text-decoration: none;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: rgba(255,255,255,0.3);
+            border-radius: 50%;
+            transition: all 0.4s ease;
+            transform: translate(-50%, -50%);
+        }
+        
+        .btn:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #E31C25, #B91C1C);
+            color: #fff;
+            box-shadow: 0 12px 40px rgba(227, 28, 37, 0.4);
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 60px rgba(227, 28, 37, 0.6);
+        }
+        
+        .btn-secondary {
+            background: #fff;
+            color: #E31C25;
+            border: 3px solid #E31C25;
+            box-shadow: 0 12px 40px rgba(0,0,0,0.15);
+        }
+        
+        .btn-secondary:hover {
+            background: #E31C25;
+            color: #fff;
+            transform: translateY(-5px);
+        }
+        
+        .hero-visual {
+            position: relative;
+            text-align: center;
+        }
+        
+        .hero-image {
+            width: 100%;
+            max-width: 540px;
+            height: 450px;
+            background: linear-gradient(135deg, #E31C25, #FF6B35, #FFD700);
+            border-radius: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 120px;
+            color: #fff;
+            box-shadow: 0 30px 80px rgba(227, 28, 37, 0.4);
+            position: relative;
+            overflow: hidden;
+            margin: 0 auto;
+        }
+        
+        .hero-image::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.2), transparent);
+            animation: shine 4s ease-in-out infinite;
+        }
+        
+        @keyframes shine {
+            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+            50% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+            100% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+        }
+        
+        /* Featured Menu Styles */
+        .featured-menu {
+            padding: 100px 0;
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+        }
+        
+        .section-header {
+            text-align: center;
+            margin-bottom: 80px;
+        }
+        
+        .section-header h2 {
+            font-size: 48px;
+            font-weight: 900;
+            color: #1a1a1a;
+            margin-bottom: 20px;
+            background: linear-gradient(45deg, #E31C25, #FF6B35);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .section-header p {
+            font-size: 20px;
+            color: #666;
+            font-weight: 500;
+        }
+        
+        .menu-grid-pro {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 40px;
+            margin-top: 60px;
+        }
+        
+        .menu-card-pro {
+            background: #fff;
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 15px 50px rgba(0,0,0,0.12);
+            transition: all 0.4s ease;
+            position: relative;
+        }
+        
+        .menu-card-pro:hover {
+            transform: translateY(-15px) scale(1.02);
+            box-shadow: 0 25px 80px rgba(0,0,0,0.2);
+        }
+        
+        .menu-card-pro.featured {
+            border: 4px solid #E31C25;
+            position: relative;
+        }
+        
+        .menu-card-pro.featured::before {
+            content: '👑 人気No.1';
+            position: absolute;
+            top: -15px;
+            left: 24px;
+            background: linear-gradient(45deg, #E31C25, #FF6B35);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 800;
+            z-index: 10;
+            box-shadow: 0 8px 25px rgba(227, 28, 37, 0.4);
+        }
+        
+        .menu-image {
+            height: 200px;
+            background: linear-gradient(135deg, #E31C25, #FF6B35, #FFD700);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .menu-image::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.3), transparent);
+        }
+        
+        .food-icon {
+            font-size: 80px;
+            z-index: 2;
+            animation: bounce 2s ease-in-out infinite;
+        }
+        
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        .menu-badge {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 800;
+            z-index: 5;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        }
+        
+        .menu-badge.hot {
+            background: linear-gradient(45deg, #FF4500, #FF6347);
+            color: white;
+            animation: pulse 2s infinite;
+        }
+        
+        .menu-badge.new {
+            background: linear-gradient(45deg, #32CD32, #00FF7F);
+            color: white;
+        }
+        
+        .menu-info {
+            padding: 32px;
+        }
+        
+        .menu-info h3 {
+            font-size: 24px;
+            font-weight: 800;
+            color: #1a1a1a;
+            margin-bottom: 16px;
+        }
+        
+        .menu-info p {
+            color: #666;
+            line-height: 1.7;
+            margin-bottom: 24px;
+            font-size: 15px;
+            font-weight: 400;
+        }
+        
+        .price-section {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 20px;
+        }
+        
+        .current-price {
+            font-size: 32px;
+            font-weight: 900;
+            color: #E31C25;
+        }
+        
+        .original-price {
+            font-size: 18px;
+            color: #999;
+            text-decoration: line-through;
+        }
+        
+        .discount {
+            background: linear-gradient(45deg, #FF4500, #FF6347);
+            color: white;
+            padding: 6px 12px;
+            border-radius: 15px;
+            font-size: 13px;
+            font-weight: 800;
+            box-shadow: 0 4px 15px rgba(255, 69, 0, 0.4);
+        }
+        
+        .menu-tags {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        
+        .tag {
+            padding: 6px 14px;
+            border-radius: 15px;
+            font-size: 12px;
+            font-weight: 700;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+        }
+        
+        .tag.recommend {
+            background: linear-gradient(45deg, #FF6B35, #FF8C00);
+            color: white;
+        }
+        
+        .tag.popular {
+            background: linear-gradient(45deg, #E31C25, #B91C1C);
+            color: white;
+        }
+        
+        .tag.new {
+            background: linear-gradient(45deg, #32CD32, #00FF7F);
+            color: white;
+        }
+        
+        .tag.limited {
+            background: linear-gradient(45deg, #9333EA, #7C3AED);
+            color: white;
+        }
+        
+        .tag.premium {
+            background: linear-gradient(45deg, #F59E0B, #D97706);
+            color: white;
+        }
+        
+        .tag.classic {
+            background: linear-gradient(45deg, #6B7280, #4B5563);
+            color: white;
+        }
+        
+        .tag.family {
+            background: linear-gradient(45deg, #059669, #047857);
+            color: white;
+        }
+        
+        /* CTA Section */
+        .cta-section {
+            background: linear-gradient(135deg, #E31C25, #B91C1C, #991B1B);
+            color: white;
+            padding: 100px 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at center, rgba(255,255,255,0.1), transparent);
+            animation: rotate 30s linear infinite;
+        }
+        
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .cta-content {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .cta-content h2 {
+            font-size: 40px;
+            font-weight: 900;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .cta-content p {
+            font-size: 20px;
+            margin-bottom: 50px;
+            opacity: 0.95;
+            font-weight: 500;
+        }
+        
+        .cta-buttons {
+            display: flex;
+            gap: 30px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .cta-btn {
+            font-size: 20px;
+            padding: 22px 44px;
+            background: linear-gradient(45deg, #fff, #f8f9fa);
+            color: #E31C25;
+            border: 3px solid #fff;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+        }
+        
+        .cta-btn:hover {
+            background: transparent;
+            color: #fff;
+            border-color: #fff;
+        }
+        
+        /* Footer */
+        .footer {
+            background: linear-gradient(135deg, #1a1a1a, #2d2d2d);
+            color: #fff;
+            padding: 80px 0 30px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 50px;
+            margin-bottom: 50px;
+        }
+        
+        .footer-section h3 {
+            font-size: 28px;
+            font-weight: 800;
+            color: #E31C25;
+            margin-bottom: 20px;
+        }
+        
+        .footer-section h4 {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: #fff;
+        }
+        
+        .footer-section p {
+            color: #ccc;
+            line-height: 1.7;
+            font-size: 16px;
+        }
+        
+        .footer-section ul {
+            list-style: none;
+        }
+        
+        .footer-section ul li {
+            margin-bottom: 12px;
+        }
+        
+        .footer-section ul li a {
+            color: #ccc;
+            text-decoration: none;
+            transition: color 0.3s;
+            font-size: 16px;
+        }
+        
+        .footer-section ul li a:hover {
+            color: #E31C25;
+        }
+        
+        .admin-link {
+            background: none !important;
+            border: none !important;
+            color: #888;
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.3s;
+            cursor: pointer;
+        }
+        
+        .admin-link:hover {
+            color: #E31C25;
+        }
+        
+        .footer-bottom {
+            border-top: 2px solid #333;
+            padding-top: 30px;
+            text-align: center;
+            color: #999;
+            font-size: 16px;
+        }
+
+        /* Admin Modal Styles */
+        .admin-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .admin-modal-content {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            max-width: 400px;
+            width: 90%;
+        }
+
+        .admin-panel {
+            max-width: 800px;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+
+        .admin-modal-content h2 {
+            color: #E31C25;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .admin-modal-content input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        .admin-modal-content button {
+            padding: 10px 20px;
+            margin: 5px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .admin-modal-content button[type="submit"] {
+            background: #E31C25;
+            color: white;
+        }
+
+        .admin-modal-content button[type="button"] {
+            background: #ccc;
+            color: #333;
+        }
+
+        .admin-actions {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+
+        .btn-add {
+            background: #E31C25 !important;
+            color: white !important;
+        }
+
+        .btn-close {
+            background: #666 !important;
+            color: white !important;
+        }
+
+        .menu-item-admin {
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 10px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .menu-info-admin h3 {
+            color: #E31C25;
+            margin: 0 0 5px 0;
+        }
+
+        .menu-info-admin .description {
+            color: #666;
+            font-size: 14px;
+            margin: 10px 0;
+        }
+
+        .menu-tags-admin {
+            display: flex;
+            gap: 5px;
+        }
+
+        .tag.new { background: #E31C25; }
+        .tag.recommended { background: #FF6B35; }
+        .tag.popular { background: #007bff; }
+
+        .menu-actions {
+            display: flex;
+            gap: 5px;
+            flex-wrap: wrap;
+        }
+
+        .menu-actions button {
+            padding: 5px 10px;
+            border: 1px solid #ddd;
+            background: white;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 12px;
+        }
+
+        .menu-actions button.active {
+            background: #E31C25;
+            color: white;
+        }
+
+        .edit-btn {
+            background: #007bff !important;
+            color: white !important;
+        }
+
+        .delete-btn {
+            background: #dc3545 !important;
+            color: white !important;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+                gap: 50px;
+            }
+            
+            .hero-text h1 {
+                font-size: 36px;
+            }
+            
+            .main-nav {
+                display: none;
+            }
+            
+            .section-header h2 {
+                font-size: 32px;
+            }
+            
+            .cta-content h2 {
+                font-size: 28px;
+            }
+            
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .menu-grid-pro {
+                grid-template-columns: 1fr;
+            }
+            
+            .logo-text {
+                font-size: 32px;
+            }
+            
+            .promo-banner {
+                font-size: 16px;
+                padding: 12px 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-top">
+            <div class="container">
+                🎉 期間限定！新メニュー続々登場 & お得なキャンペーン情報をチェック！ 🎉
+            </div>
+        </div>
+        <div class="header-main">
+            <div class="container">
+                <div class="header-content">
+                    <div class="logo">
+                        <div class="logo-text">ほか弁当</div>
+                        <div class="logo-badge">毎日手作り</div>
+                    </div>
+                    <nav class="main-nav">
+                        <a href="/">ホーム</a>
+                        <a href="/menu">メニュー</a>
+                        <a href="/campaign">キャンペーン</a>
+                        <a href="/store">店舗情報</a>
+                        <a href="/contact">お問い合わせ</a>
+                    </nav>
+                </div>
+            </div>
+        </div>
+        <div class="promo-banner" id="promo-banner">
+            <div id="recommended-menu">
+                🔥 本日のおすすめ: 特製から揚げ弁当 ¥590 🔥
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="container">
+                <div class="hero-content">
+                    <div class="hero-text">
+                        <h1>
+                            <span class="highlight">日本一</span>美味しい<br>
+                            手作りお弁当を<br>
+                            毎日お届けします
+                        </h1>
+                        <p>
+                            50年以上の伝統と経験から生まれた、本格的な手作りの味。<br>
+                            新鮮な国産食材と特製ソースで、いつでもあつあつの美味しさをお楽しみいただけます。
+                        </p>
+                        <div class="hero-buttons">
+                            <a href="/menu" class="btn btn-primary">
+                                🍱 メニュー一覧
+                            </a>
+                            <a href="/order" class="btn btn-secondary">
+                                📞 今すぐ注文
+                            </a>
+                        </div>
+                    </div>
+                    <div class="hero-visual">
+                        <div class="hero-image">
+                            🍱🍚🍣
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="featured-menu">
+            <div class="container">
+                <div class="section-header">
+                    <h2>🔥 今週の人気メニュー TOP4</h2>
+                    <p>お客様から特にご好評いただいている逸品たちです</p>
+                </div>
+                <div class="menu-grid-pro" id="menu-grid">
+                    <!-- メニューは動的に生成されます -->
+                </div>
+            </div>
+        </section>
+        
+        <section class="cta-section">
+            <div class="container">
+                <div class="cta-content">
+                    <h2>今すぐ注文して、あつあつのお弁当をお楽しみください！</h2>
+                    <p>電話一本で簡単注文。30分以内にお届けします。</p>
+                    <div class="cta-buttons">
+                        <a href="tel:0120-123-456" class="btn btn-primary cta-btn">
+                            📞 0120-123-456
+                        </a>
+                        <a href="/menu" class="btn btn-secondary">
+                            🍱 メニューを見る
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <footer class="footer">
+            <div class="container">
+                <div class="footer-content">
+                    <div class="footer-section">
+                        <h3>ほか弁当</h3>
+                        <p>美味しい手作りのお弁当を<br>毎日皆様にお届けしています。<br><br>創業50年以上の伝統と信頼で、<br>心を込めて調理いたします。</p>
+                    </div>
+                    <div class="footer-section">
+                        <h4>メニュー</h4>
+                        <ul>
+                            <li><a href="/menu/bento">お弁当</a></li>
+                            <li><a href="/menu/teishoku">定食</a></li>
+                            <li><a href="/menu/don">丼物</a></li>
+                            <li><a href="/menu/side">サイドメニュー</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-section">
+                        <h4>サービス</h4>
+                        <ul>
+                            <li><a href="/delivery">配達サービス</a></li>
+                            <li><a href="/takeout">お持ち帰り</a></li>
+                            <li><a href="/catering">ケータリング</a></li>
+                            <li><a href="/campaign">キャンペーン情報</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-section">
+                        <h4>お問い合わせ</h4>
+                        <p>📞 0120-123-456</p>
+                        <p>営業時間：10:00-22:00（年中無休）</p>
+                        <p>配達エリア：市内全域対応</p>
+                        <button onclick="showAdminLogin()" class="admin-link">管理者ページ</button>
+                    </div>
+                </div>
+                <div class="footer-bottom">
+                    <p>&copy; 2024 ほか弁当. All rights reserved. | 日本一美味しい手作り弁当をお届け</p>
+                </div>
+            </div>
+        </footer>
+    </main>
+
+    <!-- 管理者ログインモーダル -->
+    <div id="adminModal" class="admin-modal" style="display: none;">
+        <div class="admin-modal-content">
+            <h2>管理者ログイン</h2>
+            <form onsubmit="adminLogin(event)">
+                <input type="password" id="adminPassword" placeholder="パスワードを入力" required>
+                <button type="submit">ログイン</button>
+                <button type="button" onclick="closeAdminLogin()">キャンセル</button>
+            </form>
+            <p style="font-size: 12px; color: #666; margin-top: 10px;">デモ用パスワード: hokabento2024</p>
+        </div>
+    </div>
+
+    <!-- 管理者画面モーダル -->
+    <div id="adminPanel" class="admin-modal" style="display: none;">
+        <div class="admin-modal-content admin-panel">
+            <h2>メニュー管理</h2>
+            <div class="admin-actions">
+                <button onclick="addNewMenu()" class="btn-add">新しいメニューを追加</button>
+                <button onclick="closeAdmin()" class="btn-close">閉じる</button>
+            </div>
+            <div id="menuList"></div>
+        </div>
+    </div>
+
+    <script>
+        let menus = [
+            {
+                id: '1',
+                name: '特製から揚げ弁当',
+                price: 590,
+                description: '秘伝の下味で仕込んだジューシーなから揚げが自慢の一品。サクサクの衣とジューシーな肉汁が絶妙にマッチした当店イチオシのお弁当です。',
+                category: 'bento',
+                isNew: false,
+                isRecommended: true,
+                isPopular: true
+            },
+            {
+                id: '2',
+                name: 'チキン南蛮定食',
+                price: 750,
+                description: '宮崎名物を当店風にアレンジ。特製タルタルソースがたっぷりかかった、ふっくらジューシーなチキン南蛮をお楽しみください。',
+                category: 'teishoku',
+                isNew: true,
+                isRecommended: true,
+                isPopular: false
+            },
+            {
+                id: '3',
+                name: '海鮮丼',
+                price: 850,
+                description: '朝獲れの新鮮な海の幸をたっぷりと乗せた贅沢な一杯。マグロ、サーモン、イカなど厳選した海鮮が織りなす至福の味わいです。',
+                category: 'don',
+                isNew: false,
+                isRecommended: false,
+                isPopular: true
+            },
+            {
+                id: '4',
+                name: 'ハンバーグ弁当',
+                price: 650,
+                description: '国産牛肉100%使用。手こねで作ったふっくらハンバーグに特製デミグラスソースをかけた、お子様からご年配の方まで愛される定番メニュー。',
+                category: 'bento',
+                isNew: false,
+                isRecommended: false,
+                isPopular: false
+            }
+        ];
+        
+        let currentRecommendedIndex = 0;
+        let recommendedInterval;
+
+        // おすすめメニューの自動切り替え
+        function updateRecommendedMenus() {
+            const recommendedMenus = menus.filter(menu => menu.isRecommended || menu.isNew);
+            if (recommendedMenus.length === 0) return;
+
+            function showNextRecommended() {
+                const menu = recommendedMenus[currentRecommendedIndex];
+                const banner = document.getElementById('recommended-menu');
+                if (banner) {
+                    let badgeText = '';
+                    if (menu.isNew) badgeText += ' NEW';
+                    if (menu.isRecommended) badgeText += ' おすすめ';
+                    
+                    banner.innerHTML = `🔥 本日のおすすめ: ${menu.name} ¥${menu.price.toLocaleString()}${badgeText} 🔥`;
+                }
+                currentRecommendedIndex = (currentRecommendedIndex + 1) % recommendedMenus.length;
+            }
+
+            showNextRecommended();
+            if (recommendedInterval) clearInterval(recommendedInterval);
+            recommendedInterval = setInterval(showNextRecommended, 4000);
+        }
+
+        // メニュー表示を更新
+        function renderMenus() {
+            const menuGrid = document.getElementById('menu-grid');
+            if (!menuGrid) return;
+
+            const topMenus = menus.slice(0, 4);
+            menuGrid.innerHTML = topMenus.map((menu, index) => `
+                <div class="menu-card-pro ${index === 0 ? 'featured' : ''}">
+                    <div class="menu-image">
+                        ${menu.isNew ? '<div class="menu-badge new">NEW</div>' : ''}
+                        ${menu.isPopular && !menu.isNew ? '<div class="menu-badge hot">HOT</div>' : ''}
+                        <div class="food-icon">${getMenuIcon(menu.category)}</div>
+                    </div>
+                    <div class="menu-info">
+                        <h3>${menu.name}</h3>
+                        <p>${menu.description}</p>
+                        <div class="price-section">
+                            <span class="current-price">¥${menu.price.toLocaleString()}</span>
+                        </div>
+                        <div class="menu-tags">
+                            ${menu.isRecommended ? '<span class="tag recommend">おすすめ</span>' : ''}
+                            ${menu.isPopular ? '<span class="tag popular">人気No.1</span>' : ''}
+                            ${menu.isNew ? '<span class="tag new">NEW</span>' : ''}
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function getMenuIcon(category) {
+            switch(category) {
+                case 'bento': return '🍗';
+                case 'teishoku': return '🍣';
+                case 'don': return '🍣';
+                default: return '🍖';
+            }
+        }
+
+        // 管理者ログイン関連
+        function showAdminLogin() {
+            document.getElementById('adminModal').style.display = 'flex';
+        }
+
+        function closeAdminLogin() {
+            document.getElementById('adminModal').style.display = 'none';
+            document.getElementById('adminPassword').value = '';
+        }
+
+        function adminLogin(event) {
+            event.preventDefault();
+            const password = document.getElementById('adminPassword').value;
+            if (password === 'hokabento2024') {
+                closeAdminLogin();
+                showAdminPanel();
+            } else {
+                alert('パスワードが間違っています');
+            }
+        }
+
+        function showAdminPanel() {
+            document.getElementById('adminPanel').style.display = 'flex';
+            renderAdminMenus();
+        }
+
+        function closeAdmin() {
+            document.getElementById('adminPanel').style.display = 'none';
+        }
+
+        // 管理者画面のメニュー表示
+        function renderAdminMenus() {
+            const menuList = document.getElementById('menuList');
+            menuList.innerHTML = menus.map(menu => `
+                <div class="menu-item-admin">
+                    <div class="menu-info-admin">
+                        <h3>${menu.name}</h3>
+                        <p>¥${menu.price.toLocaleString()}</p>
+                        <p class="description">${menu.description}</p>
+                        <div class="menu-tags-admin">
+                            ${menu.isNew ? '<span class="tag new">NEW</span>' : ''}
+                            ${menu.isRecommended ? '<span class="tag recommended">おすすめ</span>' : ''}
+                            ${menu.isPopular ? '<span class="tag popular">人気</span>' : ''}
+                        </div>
+                    </div>
+                    <div class="menu-actions">
+                        <button onclick="toggleFlag('${menu.id}', 'isNew')" class="${menu.isNew ? 'active' : ''}">NEW</button>
+                        <button onclick="toggleFlag('${menu.id}', 'isRecommended')" class="${menu.isRecommended ? 'active' : ''}">おすすめ</button>
+                        <button onclick="toggleFlag('${menu.id}', 'isPopular')" class="${menu.isPopular ? 'active' : ''}">人気</button>
+                        <button onclick="editMenu('${menu.id}')" class="edit-btn">編集</button>
+                        <button onclick="deleteMenu('${menu.id}')" class="delete-btn">削除</button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // フラグの切り替え
+        function toggleFlag(menuId, flagName) {
+            const menuIndex = menus.findIndex(m => m.id === menuId);
+            if (menuIndex !== -1) {
+                menus[menuIndex][flagName] = !menus[menuIndex][flagName];
+                saveMenus();
+                renderAdminMenus();
+                updateRecommendedMenus();
+                renderMenus();
+            }
+        }
+
+        // メニュー削除
+        function deleteMenu(menuId) {
+            if (confirm('このメニューを削除しますか？')) {
+                menus = menus.filter(m => m.id !== menuId);
+                saveMenus();
+                renderAdminMenus();
+                updateRecommendedMenus();
+                renderMenus();
+            }
+        }
+
+        // メニュー編集（簡易版）
+        function editMenu(menuId) {
+            const menu = menus.find(m => m.id === menuId);
+            if (menu) {
+                const newName = prompt('メニュー名:', menu.name);
+                const newPrice = prompt('価格:', menu.price);
+                const newDescription = prompt('説明:', menu.description);
+                
+                if (newName && newPrice && newDescription) {
+                    menu.name = newName;
+                    menu.price = parseInt(newPrice);
+                    menu.description = newDescription;
+                    saveMenus();
+                    renderAdminMenus();
+                    updateRecommendedMenus();
+                    renderMenus();
+                }
+            }
+        }
+
+        // 新しいメニュー追加
+        function addNewMenu() {
+            const name = prompt('メニュー名:');
+            const price = prompt('価格:');
+            const description = prompt('説明:');
+            
+            if (name && price && description) {
+                const newMenu = {
+                    id: Date.now().toString(),
+                    name: name,
+                    price: parseInt(price),
+                    description: description,
+                    category: 'bento',
+                    isNew: true,
+                    isRecommended: false,
+                    isPopular: false
+                };
+                menus.push(newMenu);
+                saveMenus();
+                renderAdminMenus();
+                updateRecommendedMenus();
+                renderMenus();
+            }
+        }
+
+        // メニューデータを保存（LocalStorage）
+        function saveMenus() {
+            try {
+                localStorage.setItem('hokabento-menus', JSON.stringify(menus));
+            } catch (error) {
+                console.error('メニューの保存に失敗しました:', error);
+            }
+        }
+
+        // メニューデータを読み込み
+        function loadMenus() {
+            try {
+                const savedMenus = localStorage.getItem('hokabento-menus');
+                if (savedMenus) {
+                    menus = JSON.parse(savedMenus);
+                }
+            } catch (error) {
+                console.error('メニューの読み込みに失敗しました:', error);
+            }
+        }
+
+        // ページロード時の初期化
+        document.addEventListener('DOMContentLoaded', function() {
+            loadMenus();
+            updateRecommendedMenus();
+            renderMenus();
+        });
+    </script>
+</body>
+</html>
