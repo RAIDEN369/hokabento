@@ -1306,7 +1306,7 @@
                 price: 590,
                 description: '秘伝の下味で仕込んだジューシーなから揚げが自慢の一品。サクサクの衣とジューシーな肉汁が絶妙にマッチした当店イチオシのお弁当です。',
                 category: 'bento',
-                image: 'https://images.unsplash.com/photo-1546833999-b9f581a1996d?w=400&h=300&fit=crop&crop=center',
+                icon: '🍗',
                 isNew: false,
                 isRecommended: true,
                 isPopular: true
@@ -1317,7 +1317,7 @@
                 price: 650,
                 description: '宮崎名物を当店風にアレンジ。特製タルタルソースがたっぷりかかった、ふっくらジューシーなチキン南蛮弁当です。',
                 category: 'bento',
-                image: 'https://images.unsplash.com/photo-1626645738196-c2a7c87a8f58?w=400&h=300&fit=crop&crop=center',
+                icon: '🐔',
                 isNew: true,
                 isRecommended: true,
                 isPopular: false
@@ -1328,7 +1328,7 @@
                 price: 780,
                 description: '朝獲れの新鮮な海の幸をたっぷりと乗せた贅沢な一品。マグロ、サーモン、イカなど厳選した海鮮が織りなす至福の味わいです。',
                 category: 'bento',
-                image: 'https://images.unsplash.com/photo-1579952363873-27d3bfad9c0d?w=400&h=300&fit=crop&crop=center',
+                icon: '🐟',
                 isNew: false,
                 isRecommended: false,
                 isPopular: true
@@ -1339,7 +1339,7 @@
                 price: 580,
                 description: '国産牛肉100%使用。手こねで作ったふっくらハンバーグに特製デミグラスソースをかけた、お子様からご年配の方まで愛される定番メニュー。',
                 category: 'bento',
-                image: 'https://images.unsplash.com/photo-1551782450-17144efb9c50?w=400&h=300&fit=crop&crop=center',
+                icon: '🥩',
                 isNew: false,
                 isRecommended: false,
                 isPopular: false
@@ -1350,7 +1350,7 @@
                 price: 720,
                 description: '厳選された国産牛カルビを秘伝のタレで味付け。ジューシーで柔らかい牛肉の旨味が口いっぱいに広がります。',
                 category: 'bento',
-                image: 'https://images.unsplash.com/photo-1540189549336-e6e99c3679fe?w=400&h=300&fit=crop&crop=center',
+                icon: '🐄',
                 isNew: false,
                 isRecommended: true,
                 isPopular: true
@@ -1361,7 +1361,7 @@
                 price: 620,
                 description: 'サクサクの衣に包まれた新鮮な海老と野菜の天ぷら。職人が一つ一つ丁寧に揚げた自慢の一品です。',
                 category: 'bento',
-                image: 'https://images.unsplash.com/photo-1565299624946-b28f40a0ca4b?w=400&h=300&fit=crop&crop=center',
+                icon: '🍤',
                 isNew: false,
                 isRecommended: false,
                 isPopular: true
@@ -1372,7 +1372,7 @@
                 price: 980,
                 description: '国産うなぎを使用した贅沢なうな重。特製の甘辛いタレが絶妙にマッチした至高の逸品です。',
                 category: 'bento',
-                image: 'https://images.unsplash.com/photo-1561043433-aaf687c4cf04?w=400&h=300&fit=crop&crop=center',
+                icon: '🐍',
                 isNew: true,
                 isRecommended: true,
                 isPopular: false
@@ -1383,7 +1383,7 @@
                 price: 480,
                 description: 'ふわふわの卵と鶏肉の絶妙なハーモニー。だしの効いた優しい味わいで、お子様からお年寄りまで愛される定番メニュー。',
                 category: 'bento',
-                image: 'https://images.unsplash.com/photo-1603133872878-684f208fb84b?w=400&h=300&fit=crop&crop=center',
+                icon: '🥚',
                 isNew: false,
                 isRecommended: false,
                 isPopular: true
@@ -1427,11 +1427,7 @@
                     <div class="menu-image">
                         ${menu.isNew ? '<div class="menu-badge new">NEW</div>' : ''}
                         ${menu.isPopular && !menu.isNew ? '<div class="menu-badge hot">HOT</div>' : ''}
-                        ${menu.image ? 
-                            `<img src="${menu.image}" alt="${menu.name}" class="menu-image-photo" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                             <div class="food-icon" style="display:none;">${getMenuIcon(menu.category)}</div>` :
-                            `<div class="food-icon">${getMenuIcon(menu.category)}</div>`
-                        }
+                        <div class="food-icon">${menu.icon || getMenuIcon(menu.category)}</div>
                     </div>
                     <div class="menu-info">
                         <h3>${menu.name}</h3>
@@ -1544,11 +1540,13 @@
                 const newName = prompt('メニュー名:', menu.name);
                 const newPrice = prompt('価格:', menu.price);
                 const newDescription = prompt('説明:', menu.description);
+                const newIcon = prompt('アイコン:', menu.icon || '🍱');
                 
                 if (newName && newPrice && newDescription) {
                     menu.name = newName;
                     menu.price = parseInt(newPrice);
                     menu.description = newDescription;
+                    menu.icon = newIcon;
                     saveMenus();
                     renderAdminMenus();
                     updateRecommendedMenus();
@@ -1562,6 +1560,7 @@
             const name = prompt('メニュー名:');
             const price = prompt('価格:');
             const description = prompt('説明:');
+            const icon = prompt('アイコン (例: 🍱):') || '🍱';
             
             if (name && price && description) {
                 const newMenu = {
@@ -1570,6 +1569,7 @@
                     price: parseInt(price),
                     description: description,
                     category: 'bento',
+                    icon: icon,
                     isNew: true,
                     isRecommended: false,
                     isPopular: false
